@@ -1,35 +1,38 @@
-import type { Dispatch, SetStateAction } from "react"
+import type { Dispatch, SetStateAction } from "react";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select"
+} from "../ui/select";
 
 type Props = {
-  location: string
-  setLocation: Dispatch<SetStateAction<string>>
-}
+  location: string;
+  setLocation: Dispatch<SetStateAction<string>>;
+};
 
 export default function LocationDropdown({ location, setLocation }: Props) {
   return (
-    <Select value={location} onValueChange={(value) => setLocation(value)}>
-      <SelectTrigger className="w-full xs:w-[180px]">
-        <SelectValue placeholder="Theme" />
-      </SelectTrigger>
-      <SelectContent className="z-1001">
-        {location === "custom" && (
-          <SelectItem value="custom">Custom</SelectItem>
-        )}
-        {locations.map((city) => (
-          <SelectItem key={city} value={city}>
-            {city}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
-  )
+    <div className="flex flex-col gap-2">
+      <span className="text-xs text-muted-foreground">Position:</span>
+      <Select value={location} onValueChange={(value) => setLocation(value)}>
+        <SelectTrigger className="w-full xs:w-[180px]">
+          <SelectValue placeholder="Theme" />
+        </SelectTrigger>
+        <SelectContent className="z-1001">
+          {location === "custom" && (
+            <SelectItem value="custom">Custom</SelectItem>
+          )}
+          {locations.map((city) => (
+            <SelectItem key={city} value={city}>
+              {city}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
+  );
 }
 
 const locations = [
@@ -45,4 +48,4 @@ const locations = [
   "Madrid",
   "Rome",
   "Lisbon",
-]
+];

@@ -1,32 +1,38 @@
-import type { Dispatch, SetStateAction } from "react"
+/**
+ * Node modules
+ */
+import type { Dispatch, SetStateAction } from "react";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select"
+} from "@/components/ui/select";
 
 type Props = {
-  mapType: string
-  setMapType: Dispatch<SetStateAction<string>>
-}
+  mapType: string;
+  setMapType: Dispatch<SetStateAction<string>>;
+};
 
 export default function MapTypeDropdown({ mapType, setMapType }: Props) {
   return (
-    <Select value={mapType} onValueChange={(value) => setMapType(value)}>
-      <SelectTrigger className="w-full xs:w-[180px]">
-        <SelectValue placeholder="Theme" />
-      </SelectTrigger>
-      <SelectContent className="z-1001">
-        {types.map((city) => (
-          <SelectItem key={city} value={city} className="capitalize">
-            {city.split("_")[0]}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
-  )
+    <div className="flex flex-col gap-2">
+      <span className="text-xs text-muted-foreground">Map Type:</span>
+      <Select value={mapType} onValueChange={(value) => setMapType(value)}>
+        <SelectTrigger className="w-full xs:w-[180px] capitalize">
+          <SelectValue placeholder="Type" />
+        </SelectTrigger>
+        <SelectContent className="z-1001">
+          {types.map((city) => (
+            <SelectItem key={city} value={city} className="capitalize">
+              {city.split("_")[0]}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
+  );
 }
 
 const types = [
@@ -35,4 +41,4 @@ const types = [
   "pressure_new",
   "wind_new",
   "temp_new",
-]
+];
