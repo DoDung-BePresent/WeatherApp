@@ -62,7 +62,7 @@ export default function SidePanel(props: Props) {
     <div
       ref={panelRef}
       className={clsx(
-        "fixed top-0 right-0 h-screen w-(--sidebar-width) shadow-md bg-sidebar z-1001 pb-6 py-4 px-4 overflow-y-scroll transition-transform duration-300 lg:translate-x-0!",
+        "fixed top-0 right-0 h-screen w-80 sm:w-(--sidebar-width) shadow-md bg-sidebar z-1001 pb-6 py-4 px-4 overflow-y-scroll transition-transform duration-300 lg:translate-x-0!",
         isSidePanelOpen ? "translate-x-0" : "translate-x-full"
       )}
     >
@@ -183,11 +183,11 @@ function AirPollution({ coords }: Props) {
               <p>0</p>
               <p>{max}</p>
             </div>
-            <div className="flex justify-between">
+            <div className="sm:flex sm:justify-between grid grid-cols-3 gap-2 sm:gap-0">
               {Object.keys(pollutant).map((quality) => (
                 <span
                   className={clsx(
-                    "px-2 py-1 rounded-md text-xs font-medium",
+                    "px-2 py-1 rounded-sm text-xs font-medium",
                     quality === currentLevel
                       ? qualityColor
                       : "bg-muted text-muted-foreground"
