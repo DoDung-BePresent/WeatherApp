@@ -1,12 +1,12 @@
-import clsx from "clsx"
-import { type ReactNode } from "react"
+import clsx from "clsx";
+import { type ReactNode } from "react";
 
 type Props = {
-  children: ReactNode
-  title?: string
-  className?: string
-  childrenClassName?: string
-}
+  children: ReactNode;
+  title?: string;
+  className?: string;
+  childrenClassName?: string;
+};
 
 export default function Card({
   children,
@@ -17,10 +17,11 @@ export default function Card({
   return (
     <div
       className={clsx(
-        "p-4 rounded-xl bg-linear-to-br from-card to-card/60 shadow-md flex flex-col gap-4 2xl:h-full border dark:border-none",
+        "p-4 rounded-md bg-linear-to-br from-card to-card/60 shadow-md flex flex-col gap-4 2xl:h-full border",
         className
       )}
     >
+      {/* TODO: Center text */}
       <h2 className="text-2xl font-semibold">{title}</h2>
       <div
         className={clsx(
@@ -31,5 +32,5 @@ export default function Card({
         {children}
       </div>
     </div>
-  )
+  );
 }

@@ -1,23 +1,41 @@
-import { getAirPollution } from "@/api"
-import type { Coords } from "@/types"
-import { useSuspenseQuery } from "@tanstack/react-query"
-import { Suspense, type Dispatch, type SetStateAction } from "react"
-import Card from "./cards/Card"
-import { Slider } from "./ui/slider"
-import clsx from "clsx"
-import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip"
-import Information from "/src/assets/information.svg?react"
-import Chevron from "/src/assets/ChevronLeft.svg?react"
-import SidePanelSkeleton from "./skeletons/SidePanelSkeleton"
+/**
+ * Node modules
+ */
+import clsx from "clsx";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { ChevronLeftIcon, CircleAlertIcon } from "lucide-react";
+import { Suspense, type Dispatch, type SetStateAction } from "react";
+
+/**
+ * Apis
+ */
+import { getAirPollution } from "@/apis";
+
+/**
+ * Types
+ */
+import type { Coords } from "@/types";
+
+/**
+ * Components
+ */
+import Card from "@/components/cards/Card";
+import { Slider } from "@/components/ui/slider";
+import SidePanelSkeleton from "@/components/skeletons/SidePanelSkeleton";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 type Props = {
-  coords: Coords
-  isSidePanelOpen: boolean
-  setIsSidePanelOpen: Dispatch<SetStateAction<boolean>>
-}
+  coords: Coords;
+  isSidePanelOpen: boolean;
+  setIsSidePanelOpen: Dispatch<SetStateAction<boolean>>;
+};
 
 export default function SidePanel(props: Props) {
-  const { isSidePanelOpen, setIsSidePanelOpen } = props
+  const { isSidePanelOpen, setIsSidePanelOpen } = props;
   return (
     <div
       className={clsx(
@@ -26,20 +44,20 @@ export default function SidePanel(props: Props) {
       )}
     >
       <button onClick={() => setIsSidePanelOpen(false)}>
-        <Chevron className="size-8 -ml-2 lg:hidden" />
+        <ChevronLeftIcon className="size-6 -ml-2 lg:hidden" />
       </button>
       <Suspense fallback={<SidePanelSkeleton />}>
         <AirPollution {...props} />
       </Suspense>
     </div>
-  )
+  );
 }
 
 function AirPollution({ coords }: Props) {
   const { data } = useSuspenseQuery({
     queryKey: ["pollution", coords],
     queryFn: () => getAirPollution(coords),
-  })
+  });
 
   return (
     <div className="flex flex-col gap-4">
@@ -49,7 +67,7 @@ function AirPollution({ coords }: Props) {
         <h1 className="text-2xl font-semibold">AQI</h1>
         <Tooltip>
           <TooltipTrigger>
-            <Information className="size-4" />
+            <CircleAlertIcon className="size-4" />
           </TooltipTrigger>
           <TooltipContent className="z-2000">
             <p className="max-w-xs">
@@ -62,9 +80,9 @@ function AirPollution({ coords }: Props) {
       </div>
       {Object.entries(data.list[0].components).map(([key, value]) => {
         const pollutant =
-          airQualityRanges[key.toUpperCase() as keyof typeof airQualityRanges]
+          airQualityRanges[key.toUpperCase() as keyof typeof airQualityRanges];
 
-        const max = Math.max(pollutant["Very Poor"].min, value)
+        const max = Math.max(pollutant["Very Poor"].min, value);
 
         const currentLevel = (() => {
           for (const [level, range] of Object.entries(pollutant)) {
@@ -72,27 +90,27 @@ function AirPollution({ coords }: Props) {
               value >= range.min &&
               (range.max === null || value <= range.max)
             )
-              return level
+              return level;
           }
-          return "Very Poor"
-        })()
+          return "Very Poor";
+        })();
 
         const qualityColor = (() => {
           switch (currentLevel) {
             case "Good":
-              return "bg-green-500"
+              return "bg-green-500";
             case "Fair":
-              return "bg-yellow-500"
+              return "bg-yellow-500";
             case "Moderate":
-              return "bg-orange-500"
+              return "bg-orange-500";
             case "Poor":
-              return "bg-red-500"
+              return "bg-red-500";
             case "Very Poor":
-              return "bg-purple-500"
+              return "bg-purple-500";
             default:
-              return "bg-zinc-500"
+              return "bg-zinc-500";
           }
-        })()
+        })();
 
         return (
           <Card
@@ -105,7 +123,7 @@ function AirPollution({ coords }: Props) {
                 <span className="text-lg font-bold capitalize">{key}</span>
                 <Tooltip>
                   <TooltipTrigger>
-                    <Information className="size-4" />
+                    <CircleAlertIcon className="size-4" />
                   </TooltipTrigger>
                   <TooltipContent className="z-2000">
                     <p className="max-w-xs">
@@ -137,22 +155,22 @@ function AirPollution({ coords }: Props) {
               ))}
             </div>
           </Card>
-        )
+        );
       })}
     </div>
-  )
+  );
 }
 
-type AirQualityLevel = "Good" | "Fair" | "Moderate" | "Poor" | "Very Poor"
+type AirQualityLevel = "Good" | "Fair" | "Moderate" | "Poor" | "Very Poor";
 
 interface Range {
-  min: number
-  max: number | null
+  min: number;
+  max: number | null;
 }
 
-type Pollutant = "SO2" | "NO2" | "PM10" | "PM2_5" | "O3" | "CO" | "NO" | "NH3"
+type Pollutant = "SO2" | "NO2" | "PM10" | "PM2_5" | "O3" | "CO" | "NO" | "NH3";
 
-type AirQualityRanges = Record<Pollutant, Record<AirQualityLevel, Range>>
+type AirQualityRanges = Record<Pollutant, Record<AirQualityLevel, Range>>;
 
 const airQualityRanges: AirQualityRanges = {
   SO2: {
@@ -211,7 +229,7 @@ const airQualityRanges: AirQualityRanges = {
     Poor: { min: 150, max: 200 },
     "Very Poor": { min: 200, max: null },
   },
-}
+};
 
 const pollutantNameMapping: Record<Pollutant, string> = {
   SO2: "Sulfur dioxide",
@@ -222,4 +240,4 @@ const pollutantNameMapping: Record<Pollutant, string> = {
   CO: "Carbon monoxide",
   NO: "Nitrogen monoxide",
   NH3: "Ammonia",
-}
+};

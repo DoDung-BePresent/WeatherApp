@@ -1,6 +1,6 @@
 import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import type { Coords } from "../types";
+import type { Coords } from "@/types";
 import { useEffect } from "react";
 import { MaptilerLayer } from "@maptiler/leaflet-maptilersdk";
 

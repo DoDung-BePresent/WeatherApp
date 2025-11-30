@@ -1,6 +1,7 @@
 /**
  * Node modules
  */
+import { MenuIcon } from "lucide-react";
 import { Suspense, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
@@ -12,12 +13,7 @@ import type { Coords } from "@/types";
 /**
  * Api
  */
-import { getGeocode } from "@/api";
-
-/**
- * Assets
- */
-import Hamburger from "@/assets/hamburger.svg?react";
+import { getGeocode } from "@/apis";
 
 /**
  * Components
@@ -25,6 +21,7 @@ import Hamburger from "@/assets/hamburger.svg?react";
 import Map from "@/components/Map";
 import MapLegend from "@/components/MapLegend";
 import SidePanel from "@/components/SidePanel";
+import { Toggle } from "@/components/ui/toggle";
 import MobileHeader from "@/components/MobileHeader";
 import LightDarkToggle from "@/components/LightDarkToggle";
 import DailyForecast from "@/components/cards/DailyForecast";
@@ -70,12 +67,12 @@ function App() {
             <div className="hidden xs:block">
               <LightDarkToggle />
             </div>
-            <button
+            <Toggle
               onClick={() => setIsSidePanelOpen(true)}
               className="hidden xs:block"
             >
-              <Hamburger className="size-6 lg:hidden" />
-            </button>
+              <MenuIcon className="size-5" />
+            </Toggle>
           </div>
         </div>
         <div className="grid grid-cols-1 2xl:flex-1 2xl:min-h-0 md:grid-cols-2 2xl:grid-cols-4 2xl:grid-rows-4 gap-4">
