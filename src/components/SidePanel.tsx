@@ -1,6 +1,7 @@
 /**
  * Node modules
  */
+import { useEffect, useRef } from "react";
 import clsx from "clsx";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { ChevronLeftIcon, CircleAlertIcon } from "lucide-react";
@@ -36,16 +37,35 @@ type Props = {
 
 export default function SidePanel(props: Props) {
   const { isSidePanelOpen, setIsSidePanelOpen } = props;
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        panelRef.current &&
+        !panelRef.current.contains(event.target as Node)
+      ) {
+        setIsSidePanelOpen(false);
+      }
+    }
+
+    if (isSidePanelOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isSidePanelOpen, setIsSidePanelOpen]);
+
   return (
     <div
+      ref={panelRef}
       className={clsx(
-        "fixed top-0 right-0 h-screen w-(--sidebar-width) shadow-md bg-sidebar z-1001 pb-6 px-4 overflow-y-scroll transition-transform duration-300 lg:translate-x-0!",
+        "fixed top-0 right-0 h-screen w-(--sidebar-width) shadow-md bg-sidebar z-1001 pb-6 py-4 px-4 overflow-y-scroll transition-transform duration-300 lg:translate-x-0!",
         isSidePanelOpen ? "translate-x-0" : "translate-x-full"
       )}
     >
-      <button onClick={() => setIsSidePanelOpen(false)}>
-        <ChevronLeftIcon className="size-6 -ml-2 lg:hidden" />
-      </button>
       <Suspense fallback={<SidePanelSkeleton />}>
         <AirPollution {...props} />
       </Suspense>
@@ -139,10 +159,7 @@ function AirPollution({ coords }: Props) {
           <Card
             key={key}
             childrenClassName="flex flex-col gap-3"
-            className={clsx(
-              "gap-0! bg-none",
-              qualityColorCard
-            )}
+            className={clsx("gap-0! bg-none", qualityColorCard)}
           >
             <div className="flex justify-between">
               <div className="flex items-center gap-2">

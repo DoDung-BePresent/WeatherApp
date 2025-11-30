@@ -23,7 +23,6 @@ import MapLegend from "@/components/MapLegend";
 import SidePanel from "@/components/SidePanel";
 import { Toggle } from "@/components/ui/toggle";
 import MobileHeader from "@/components/MobileHeader";
-import LightDarkToggle from "@/components/LightDarkToggle";
 import DailyForecast from "@/components/cards/DailyForecast";
 import HourlyForecast from "@/components/cards/HourlyForecast";
 import CurrentWeather from "@/components/cards/CurrentWeather";
@@ -63,17 +62,6 @@ function App() {
         <div className="flex gap-2">
           <LocationDropdown location={location} setLocation={setLocation} />
           <MapTypeDropdown mapType={mapType} setMapType={setMapType} />
-          <div className="ml-auto flex gap-4 items-end">
-            <div className="hidden xs:block">
-              <LightDarkToggle />
-            </div>
-            <Toggle
-              onClick={() => setIsSidePanelOpen(true)}
-              className="hidden xs:block"
-            >
-              <MenuIcon className="size-5" />
-            </Toggle>
-          </div>
         </div>
         <div className="grid grid-cols-1 2xl:flex-1 2xl:min-h-0 md:grid-cols-2 2xl:grid-cols-4 2xl:grid-rows-4 gap-4">
           <div className="relative h-120 2xl:h-auto col-span-1 md:col-span-2 2xl:col-span-4 2xl:row-span-2 order-1">
