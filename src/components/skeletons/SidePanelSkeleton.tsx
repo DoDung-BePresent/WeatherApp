@@ -1,9 +1,10 @@
-import SideCardSkeleton from "./SideCardSkeleton"
-import { Skeleton } from "../ui/skeleton"
+/**
+ * Components
+ */
+import SideCardSkeleton from "@/components/skeletons/SideCardSkeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 
-type Props = {}
-
-export default function SidePanelSkeleton({}: Props) {
+export default function SidePanelSkeleton() {
   return (
     <div className="flex flex-col gap-4">
       <h1 className="text-2xl font-semibold">Air Pollution</h1>
@@ -15,5 +16,5 @@ export default function SidePanelSkeleton({}: Props) {
         <SideCardSkeleton key={index} />
       ))}
     </div>
-  )
+  );
 }

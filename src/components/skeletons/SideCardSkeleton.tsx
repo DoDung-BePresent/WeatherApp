@@ -1,9 +1,10 @@
-import Card from "../cards/Card"
-import { Skeleton } from "../ui/skeleton"
+/**
+ * Components
+ */
+import Card from "@/components/cards/Card";
+import { Skeleton } from "@/components/ui/skeleton";
 
-type Props = {}
-
-export default function SideCardSkeleton({}: Props) {
+export default function SideCardSkeleton() {
   return (
     <Card
       childrenClassName="flex flex-col gap-3"
@@ -24,5 +25,5 @@ export default function SideCardSkeleton({}: Props) {
         ))}
       </div>
     </Card>
-  )
+  );
 }

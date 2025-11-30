@@ -1,7 +1,6 @@
 /**
  * Node modules
  */
-import { MenuIcon } from "lucide-react";
 import { Suspense, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
@@ -21,7 +20,6 @@ import { getGeocode } from "@/apis";
 import Map from "@/components/Map";
 import MapLegend from "@/components/MapLegend";
 import SidePanel from "@/components/SidePanel";
-import { Toggle } from "@/components/ui/toggle";
 import MobileHeader from "@/components/MobileHeader";
 import DailyForecast from "@/components/cards/DailyForecast";
 import HourlyForecast from "@/components/cards/HourlyForecast";

@@ -1,9 +1,10 @@
-import Card from "../cards/Card"
-import { Skeleton } from "../ui/skeleton"
+/**
+ * Components
+ */
+import Card from "@/components/cards/Card";
+import { Skeleton } from "@/components/ui/skeleton";
 
-type Props = {}
-
-export default function DailySkeleton({}: Props) {
+export default function DailySkeleton() {
   return (
     <Card
       title="Daily Forecast"
@@ -19,5 +20,5 @@ export default function DailySkeleton({}: Props) {
         </div>
       ))}
     </Card>
-  )
+  );
 }

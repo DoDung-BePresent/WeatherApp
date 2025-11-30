@@ -1,3 +1,6 @@
+/**
+ * Node modules
+ */
 import clsx from "clsx";
 import { type ReactNode } from "react";
 

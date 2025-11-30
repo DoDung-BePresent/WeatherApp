@@ -1,3 +1,6 @@
+/**
+ * Node modules
+ */
 import z from "zod"
 
 export const AirPollutionSchema = z.object({

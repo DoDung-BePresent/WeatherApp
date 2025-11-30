@@ -1,6 +1,9 @@
-import { AirPollutionSchema } from "@/schemas/airPollutionSchema";
+/**
+ * Schemas
+ */
 import { GeocodeSchema } from "@/schemas/geocodeSchema";
 import { weatherSchema } from "@/schemas/weatherSchema";
+import { AirPollutionSchema } from "@/schemas/airPollutionSchema";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 

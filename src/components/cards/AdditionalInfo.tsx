@@ -1,7 +1,6 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
-import Card from "@/components/cards/Card";
-import type { Coords } from "@/types";
-import { getWeather } from "@/apis";
+/**
+ * Node modules
+ */
 import {
   CircleGaugeIcon,
   CloudIcon,
@@ -11,6 +10,22 @@ import {
   ThermometerSunIcon,
   WindIcon,
 } from "lucide-react";
+import { useSuspenseQuery } from "@tanstack/react-query";
+
+/**
+ * Types
+ */
+import type { Coords } from "@/types";
+
+/**
+ * Apis
+ */
+import { getWeather } from "@/apis";
+
+/**
+ * Components
+ */
+import Card from "@/components/cards/Card";
 
 type Props = {
   coords: Coords;

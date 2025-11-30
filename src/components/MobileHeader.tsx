@@ -1,5 +1,12 @@
-import type { Dispatch, SetStateAction } from "react";
+/**
+ * Node modules
+ */
 import { MenuIcon } from "lucide-react";
+import type { Dispatch, SetStateAction } from "react";
+
+/**
+ * Components
+ */
 import { Toggle } from "@/components/ui/toggle";
 
 type Props = {

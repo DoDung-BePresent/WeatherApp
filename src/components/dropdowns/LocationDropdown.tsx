@@ -1,3 +1,6 @@
+/**
+ * Node modules
+ */
 import type { Dispatch, SetStateAction } from "react";
 import {
   Select,
@@ -5,7 +8,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+} from "@/components/ui/select";
 
 type Props = {
   location: string;

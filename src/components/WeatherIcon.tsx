@@ -1,9 +1,12 @@
-import clsx from "clsx"
+/**
+ * Node modules
+ */
+import clsx from "clsx";
 
 type Props = {
-  src: string
-  className?: string
-}
+  src: string;
+  className?: string;
+};
 
 export default function WeatherIcon({ src, className }: Props) {
   return (
@@ -12,5 +15,5 @@ export default function WeatherIcon({ src, className }: Props) {
       src={`https://openweathermap.org/img/wn/${src}.png`}
       alt="Weather Icon"
     />
-  )
+  );
 }

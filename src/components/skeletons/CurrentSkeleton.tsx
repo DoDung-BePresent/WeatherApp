@@ -1,9 +1,10 @@
-import Card from "../cards/Card"
-import { Skeleton } from "../ui/skeleton"
+/**
+ * Components
+ */
+import Card from "@/components/cards/Card";
+import { Skeleton } from "@/components/ui/skeleton";
 
-type Props = {}
-
-export default function CurrentSkeleton({}: Props) {
+export default function CurrentSkeleton() {
   return (
     <Card
       title="Current Weather"
@@ -34,5 +35,5 @@ export default function CurrentSkeleton({}: Props) {
         </div>
       </div>
     </Card>
-  )
+  );
 }

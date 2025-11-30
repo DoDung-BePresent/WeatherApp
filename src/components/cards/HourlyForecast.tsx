@@ -1,7 +1,22 @@
-import Card from "./Card";
+/**
+ * Node modules
+ */
 import { useSuspenseQuery } from "@tanstack/react-query";
+
+/**
+ * Components
+ */
+import Card from "@/components/cards/Card";
+import WeatherIcon from "@/components/WeatherIcon";
+
+/**
+ * Apis
+ */
 import { getWeather } from "@/apis";
-import WeatherIcon from "../WeatherIcon";
+
+/**
+ * Types
+ */
 import type { Coords } from "@/types";
 
 type Props = {

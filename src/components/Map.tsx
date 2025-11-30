@@ -1,8 +1,15 @@
-import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import type { Coords } from "@/types";
+/**
+ * Node modules
+ */
 import { useEffect } from "react";
+import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
 import { MaptilerLayer } from "@maptiler/leaflet-maptilersdk";
+import "leaflet/dist/leaflet.css";
+
+/**
+ * Types
+ */
+import type { Coords } from "@/types";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const MAP_TILER_KEY = import.meta.env.VITE_MAP_TILER_KEY;

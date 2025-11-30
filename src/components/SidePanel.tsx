@@ -4,7 +4,7 @@
 import { useEffect, useRef } from "react";
 import clsx from "clsx";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { ChevronLeftIcon, CircleAlertIcon } from "lucide-react";
+import { CircleAlertIcon } from "lucide-react";
 import { Suspense, type Dispatch, type SetStateAction } from "react";
 
 /**
