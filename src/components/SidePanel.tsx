@@ -39,7 +39,7 @@ export default function SidePanel(props: Props) {
   return (
     <div
       className={clsx(
-        "fixed top-0 right-0 h-screen w-(--sidebar-width) shadow-md bg-sidebar z-1001 py-8 px-4 overflow-y-scroll transition-transform duration-300 lg:translate-x-0!",
+        "fixed top-0 right-0 h-screen w-(--sidebar-width) shadow-md bg-sidebar z-1001 pb-6 px-4 overflow-y-scroll transition-transform duration-300 lg:translate-x-0!",
         isSidePanelOpen ? "translate-x-0" : "translate-x-full"
       )}
     >
@@ -61,22 +61,28 @@ function AirPollution({ coords }: Props) {
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-semibold">Air Pollution</h1>
-      <h1 className="text-5xl font-semibold">{data.list[0].main.aqi}</h1>
-      <div className="flex items-center gap-2">
-        <h1 className="text-2xl font-semibold">AQI</h1>
-        <Tooltip>
-          <TooltipTrigger>
-            <CircleAlertIcon className="size-4" />
-          </TooltipTrigger>
-          <TooltipContent className="z-2000">
-            <p className="max-w-xs">
-              {" "}
-              Air Quality Index. Possible values: 1, 2, 3, 4, 5. Where 1 = Good,
-              2 = Fair, 3 = Moderate, 4 = Poor, 5 = Very Poor.
-            </p>
-          </TooltipContent>
-        </Tooltip>
+      <div className="space-y-2">
+        <div className="flex items-center justify-center gap-2">
+          <span className="text-sm font-semibold text-muted-foreground">
+            AQI
+          </span>
+          <Tooltip>
+            <TooltipTrigger>
+              <CircleAlertIcon className="size-3.5 text-muted-foreground" />
+            </TooltipTrigger>
+            <TooltipContent className="z-2000">
+              <p className="max-w-xs">
+                {" "}
+                Air Quality Index. Possible values: 1, 2, 3, 4, 5. Where 1 =
+                Good, 2 = Fair, 3 = Moderate, 4 = Poor, 5 = Very Poor.
+              </p>
+            </TooltipContent>
+          </Tooltip>
+        </div>
+        <h1 className="text-6xl font-semibold text-center">
+          {data.list[0].main.aqi}
+        </h1>
+        <p className="text-xl text-center">Air Pollution</p>
       </div>
       {Object.entries(data.list[0].components).map(([key, value]) => {
         const pollutant =
@@ -112,11 +118,31 @@ function AirPollution({ coords }: Props) {
           }
         })();
 
+        const qualityColorCard = (() => {
+          switch (currentLevel) {
+            case "Good":
+              return "bg-green-500/10 border-green-500";
+            case "Fair":
+              return "bg-yellow-500/10 border-yellow-500";
+            case "Moderate":
+              return "bg-orange-500/10 border-orange-500";
+            case "Poor":
+              return "bg-red-500/10 border-red-500";
+            case "Very Poor":
+              return "bg-purple-500/10 border-purple-500";
+            default:
+              return "bg-zinc-500/10 border-zinc-500";
+          }
+        })();
+
         return (
           <Card
             key={key}
             childrenClassName="flex flex-col gap-3"
-            className="hover:scale-105 transition-transform duration-300 from-sidebar-accent to-sidebar-accent/60 gap-0!"
+            className={clsx(
+              "gap-0! bg-none",
+              qualityColorCard
+            )}
           >
             <div className="flex justify-between">
               <div className="flex items-center gap-2">
